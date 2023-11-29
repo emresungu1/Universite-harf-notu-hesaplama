@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Harf Notu Hesaplama</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Custom CSS styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+        }
+
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Harf Notu Hesaplama</h1>
+        <form id="gradesForm">
+            <div class="form-group">
+                <label for="vize">Vize Notu:</label>
+                <input type="number" class="form-control" id="vize" required>
+            </div>
+            <div class="form-group">
+                <label for="kisaSinav">Kısa Sınav Notu:</label>
+                <input type="number" class="form-control" id="kisaSinav" required>
+            </div>
+            <div class="form-group">
+                <label for="final">Final Notu:</label>
+                <input type="number" class="form-control" id="final" required>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="calculateGrade()">Notu Hesapla</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // JavaScript kodu
+        function calculateGrade() {
+            var vize = parseFloat(document.getElementById('vize').value);
+            var kisaSinav = parseFloat(document.getElementById('kisaSinav').value);
+            var final = parseFloat(document.getElementById('final').value);
+
+            var ortalama = (vize * 0.3) + (kisaSinav * 0.1) + (final * 0.6);
+            var harfNotu = '';
+
+            if (ortalama >= 0 && ortalama < 50) {
+                harfNotu = 'FF';
+            } else if (ortalama < 55) {
+                harfNotu = 'DD';
+            } else if (ortalama < 60) {
+                harfNotu = 'DC';
+            } else if (ortalama < 70) {
+                harfNotu = 'CC';
+            } else if (ortalama < 75) {
+                harfNotu = 'CB';
+            } else if (ortalama < 85) {
+                harfNotu = 'BB';
+            } else if (ortalama < 90) {
+                harfNotu = 'BA';
+            } else if (ortalama <= 100) {
+                harfNotu = 'AA';
+            } else {
+                document.getElementById('result').innerHTML = 'Yanlış değer girdiniz!';
+                return;
+            }
+
+            document.getElementById('result').innerHTML = 'Ortalama: ' + ortalama.toFixed(2) + '<br> Harf Notu: ' + harfNotu;
+        }
+    </script>
+</body>
+
+</html>
